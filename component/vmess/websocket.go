@@ -10,6 +10,8 @@ import (
 	"strings"
 	"time"
 
+	"github.com/Dreamacro/clash/common/pool"
+
 	"github.com/gorilla/websocket"
 )
 
@@ -108,7 +110,7 @@ func NewWebsocketConn(conn net.Conn, c *WebsocketConfig) (net.Conn, error) {
 			return conn, nil
 		},
 		ReadBufferSize:   4 * 1024,
-		WriteBufferSize:  4 * 1024,
+		WriteBufferPool:  &pool.BufPool,
 		HandshakeTimeout: time.Second * 8,
 	}
 
